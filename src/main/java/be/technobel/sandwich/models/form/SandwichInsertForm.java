@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class SandwichInsertForm {
 
+    @Size(min=4)
     private String name;
     private String desc;
     private double price;

@@ -3,6 +3,7 @@ package be.technobel.sandwich.service.impl;
 import be.technobel.sandwich.models.dto.SandwichDTO;
 import be.technobel.sandwich.models.entity.Sandwich;
 import be.technobel.sandwich.models.form.SandwichInsertForm;
+import be.technobel.sandwich.models.form.SandwichUpdateForm;
 import be.technobel.sandwich.repository.SandwichRepository;
 import be.technobel.sandwich.service.SandwichService;
 import be.technobel.sandwich.service.mapper.SandwichMapper;
@@ -42,6 +43,18 @@ public class SandwichServiceImpl implements SandwichService {
 
         Sandwich entity = mapper.toEntity(form);
         sandwichRepository.save( entity );
+    }
+
+    @Override
+    public void update(Long id, SandwichUpdateForm form) {
+        Sandwich toUpdate = sandwichRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sandwich not found"));
+
+        toUpdate.setName( form.getName() );
+        toUpdate.setDescription( form.getDesc() );
+        toUpdate.setPrice( form.getPrice() );
+
+        sandwichRepository.save(toUpdate);
     }
 
 }
