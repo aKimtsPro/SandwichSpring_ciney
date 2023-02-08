@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:replace="~{ fragment/fragments :: base_css }"></th:block>
 </head>
 <body>
 
@@ -27,6 +28,8 @@
     <a href="/sandwich/all">
         <button>back to menu</button>
     </a>
+
+    <th:block th:replace="~{ fragment/fragments :: base_js }"></th:block>
 
 </body>
 </html>

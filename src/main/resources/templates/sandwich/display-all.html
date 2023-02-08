@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:replace="~{ fragment/fragments :: base_css }"></th:block>
 </head>
 <body>
 
@@ -28,6 +29,9 @@
             </tr>
         </tbody>
     </table>
+
+    <div th:replace="~{ fragment/fragments :: base_js }">
+    </div>
 
 </body>
 </html>
