@@ -65,7 +65,15 @@ public class SandwichController {
     }
 
     @PostMapping("/{id:[0-9]+}/update")
-    public String processUpdateForm(SandwichUpdateForm form,@PathVariable long id){
+    public String processUpdateForm(
+            @PathVariable Long id,
+            @ModelAttribute("form") @Valid SandwichUpdateForm form,
+            BindingResult bindingResult
+    ){
+        if( bindingResult.hasErrors() ){
+            return "sandwich/update-form";
+        }
+
         sandwichService.update(id, form);
         return "redirect:/sandwich/"+id;
     }
