@@ -1,35 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" th:replace="~{ fragment/layout :: layout(~{ :: content }) }">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <th:block th:replace="~{ fragment/fragments :: base_css }"></th:block>
 </head>
 <body>
 
-    <h1>Sandwich details:</h1>
+    <th:block th:fragment="content">
+        <h1>Sandwich details:</h1>
 
-    <dl th:object="${sandwich}">
+        <div>
+            <a th:href="@{ /sandwich/{id}/update (id=${sandwich.id}) }">
+                <button class="btn btn-primary">
+                    update
+                </button>
+            </a>
+        </div>
 
-        <dt>id</dt>
-        <dd th:text="*{id}"></dd>
+        <dl th:object="${sandwich}">
 
-        <dt>name</dt>
-        <dd th:text="*{name}"></dd>
+            <dt>id</dt>
+            <dd th:text="*{id}"></dd>
 
-        <dt>price</dt>
-        <dd th:text="*{price}"></dd>
+            <dt>name</dt>
+            <dd th:text="*{name}"></dd>
 
-        <dt>description</dt>
-        <dd th:text="*{desc}"></dd>
+            <dt>price</dt>
+            <dd th:text="*{price}"></dd>
 
-    </dl>
+            <dt>description</dt>
+            <dd th:text="*{desc}"></dd>
 
-    <a href="/sandwich/all">
-        <button>back to menu</button>
-    </a>
+        </dl>
 
-    <th:block th:replace="~{ fragment/fragments :: base_js }"></th:block>
+        <a href="/sandwich/all">
+            <button class="btn btn-primary">back to menu</button>
+        </a>
+    </th:block>
+
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 package be.technobel.sandwich.models.form;
 
+import be.technobel.sandwich.validation.constraints.EmailNotTaken;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ public class RegisterForm {
 
     @NotBlank
     @Email
+    @EmailNotTaken
     private String email;
     @NotBlank
     @Size(min=4)

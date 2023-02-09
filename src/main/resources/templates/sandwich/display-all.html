@@ -7,18 +7,28 @@
 </head>
 <body>
 
-    <h1>Sandwich menu</h1>
+    <div th:replace="~{ fragment/fragments :: header }"></div>
 
-    <table>
-        <thead>
+    <main class="container">
+        <h1>Sandwich menu</h1>
+
+        <div>
+            <a href="/sandwich/add">
+                <button class="btn btn-success">add sandwich</button>
+            </a>
+        </div>
+
+
+        <table class="table">
+            <thead>
             <tr>
                 <td>id</td>
                 <td>name</td>
                 <td>price</td>
                 <td>details</td>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <tr th:each="item : ${list}" th:object="${item}">
                 <td th:text="*{id}">1</td>
                 <td th:text="*{name}">basique</td>
@@ -27,8 +37,12 @@
                     <a th:href="@{ /sandwich/{id} (id=*{id}) }">details</a>
                 </td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </main>
+
+
+    <div th:replace="~{ fragment/fragments :: footer }"></div>
 
     <div th:replace="~{ fragment/fragments :: base_js }">
     </div>
