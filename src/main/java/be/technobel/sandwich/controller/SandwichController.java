@@ -1,8 +1,10 @@
 package be.technobel.sandwich.controller;
 
+import be.technobel.sandwich.models.dto.IngredientDTO;
 import be.technobel.sandwich.models.dto.SandwichDTO;
 import be.technobel.sandwich.models.form.SandwichInsertForm;
 import be.technobel.sandwich.models.form.SandwichUpdateForm;
+import be.technobel.sandwich.service.IngredientService;
 import be.technobel.sandwich.service.SandwichService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class SandwichController {
 
     private final SandwichService sandwichService;
+    private final IngredientService ingredientService;
 
-    public SandwichController(SandwichService sandwichService) {
+    public SandwichController(SandwichService sandwichService, IngredientService ingredientService) {
         this.sandwichService = sandwichService;
+        this.ingredientService = ingredientService;
     }
 
     // GET - /sandwich/all
@@ -36,6 +40,7 @@ public class SandwichController {
     @GetMapping("/add")
     public String insertForm(Model model){
         model.addAttribute("form", new SandwichInsertForm());
+        model.addAttribute("ingredients", ingredientService.getAll());
         return "sandwich/insert-form";
     }
 
@@ -57,9 +62,15 @@ public class SandwichController {
         form.setName( sandwich.getName() );
         form.setDesc( sandwich.getDesc() );
         form.setPrice( sandwich.getPrice() );
+        form.setIngredientsId(
+                sandwich.getIngredients().stream()
+                        .map(IngredientDTO::getId)
+                        .toList()
+        );
 
         model.addAttribute("form", form);
         model.addAttribute("id", id);
+        model.addAttribute("ingredients",ingredientService.getAll());
 
         return "sandwich/update-form";
     }

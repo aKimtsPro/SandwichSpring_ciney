@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class SandwichUpdateForm {
 
@@ -17,5 +19,7 @@ public class SandwichUpdateForm {
     @Positive(message = "doit être positif")
     @Digits(integer = 2, fraction = 2)
     private double price;
+
+    private List<Long> ingredientsId;
 
 }

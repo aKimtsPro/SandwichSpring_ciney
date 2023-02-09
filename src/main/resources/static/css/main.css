@@ -10,3 +10,7 @@ footer {
     margin-top: 20px;
     text-align: center;
 }
+
+.inline-form{
+    display: inline;
+}

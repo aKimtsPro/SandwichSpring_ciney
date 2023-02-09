@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Entity
 @Getter @Setter
 public class Sandwich {
@@ -18,5 +21,13 @@ public class Sandwich {
     private String description;
     @Column(nullable = false)
     private double price;
+
+    @ManyToMany
+    @JoinTable(
+            name = "sandwich_ingredients",
+            joinColumns = @JoinColumn(name = "sandwich_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
+    private Set<Ingredient> ingredients = new LinkedHashSet<>();
 
 }

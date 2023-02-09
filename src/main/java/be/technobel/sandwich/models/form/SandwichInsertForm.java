@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class SandwichInsertForm {
 
@@ -12,5 +14,7 @@ public class SandwichInsertForm {
     private String name;
     private String desc;
     private double price;
+
+    private List<Long> ingredientsId;
 
 }
