@@ -20,6 +20,7 @@
             <div class="mb-3">
                 <label for="in-price" class="form-label">price:</label><br/>
                 <input type="number" class="form-control" id="in-price" th:field="*{price}">
+                <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
             </div>
 
             <div class="mb-3">
