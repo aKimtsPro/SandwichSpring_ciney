@@ -1,10 +1,12 @@
 package be.technobel.sandwich.models.form;
 
 import be.technobel.sandwich.validation.constraints.EmailNotTaken;
+import be.technobel.sandwich.validation.constraints.InPast;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Data
 public class RegisterForm {
@@ -21,7 +23,7 @@ public class RegisterForm {
     @NotBlank
     private String lastName;
     @NotNull
-    @Past
+    @InPast(amount = 1, unit = ChronoUnit.YEARS)
     private LocalDate birthdate;
 
 }
