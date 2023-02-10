@@ -19,6 +19,10 @@ public class InPastValidator implements ConstraintValidator<InPast, Temporal> {
 
     @Override
     public boolean isValid(Temporal value, ConstraintValidatorContext context) {
+
+        if(value == null)
+            return true;
+
         context.disableDefaultConstraintViolation();
 
         if(
