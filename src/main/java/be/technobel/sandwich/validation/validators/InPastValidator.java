@@ -19,13 +19,13 @@ public class InPastValidator implements ConstraintValidator<InPast, Temporal> {
 
     @Override
     public boolean isValid(Temporal value, ConstraintValidatorContext context) {
-//        context.disableDefaultConstraintViolation();
+        context.disableDefaultConstraintViolation();
 
         if(
-                (value instanceof LocalDate && checkLocalDateValid((LocalDate)value) ) ||
-                (value instanceof LocalDateTime && checkLocalDateTime((LocalDateTime)value) )
+                (value instanceof LocalDate && !checkLocalDateValid((LocalDate)value) ) ||
+                (value instanceof LocalDateTime && !checkLocalDateTime((LocalDateTime)value) )
         ){
-            context.buildConstraintViolationWithTemplate("Sould be " + annotation.amount() + " days in the past" )
+            context.buildConstraintViolationWithTemplate("Should be "+annotation.amount()+" "+annotation.unit().name().toLowerCase()+" in the past" )
                     .addConstraintViolation();
             return false;
         }
@@ -33,9 +33,7 @@ public class InPastValidator implements ConstraintValidator<InPast, Temporal> {
             throw  new IllegalArgumentException();
         }
         else
-            return false;
-
-
+            return true;
     }
 
     private boolean checkLocalDateValid(LocalDate localDate){
