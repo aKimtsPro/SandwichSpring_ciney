@@ -1,5 +1,6 @@
 package be.technobel.sandwich.service.impl;
 
+import be.technobel.sandwich.exception.NotFoundException;
 import be.technobel.sandwich.models.dto.SandwichDTO;
 import be.technobel.sandwich.models.entity.Ingredient;
 import be.technobel.sandwich.models.entity.Sandwich;
@@ -39,7 +40,7 @@ public class SandwichServiceImpl implements SandwichService {
     public SandwichDTO getOne(Long id) {
         return sandwichRepository.findById(id)
                 .map( mapper::toDto )
-                .orElseThrow( () -> new RuntimeException("Sandwich not found") );
+                .orElseThrow(NotFoundException::new);
     }
 
     @Override
@@ -57,7 +58,7 @@ public class SandwichServiceImpl implements SandwichService {
     @Override
     public void update(Long id, SandwichUpdateForm form) {
         Sandwich toUpdate = sandwichRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Sandwich not found"));
+                .orElseThrow(NotFoundException::new);
 
         toUpdate.setName( form.getName() );
         toUpdate.setDescription( form.getDesc() );

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.Set;
 
-@Component
+//@Component
 @Log4j2
 public class DataInit implements InitializingBean {
 

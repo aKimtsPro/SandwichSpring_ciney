@@ -1,10 +1,13 @@
 package be.technobel.sandwich.service.impl;
 
+import be.technobel.sandwich.exception.NotFoundException;
 import be.technobel.sandwich.models.dto.IngredientDTO;
 import be.technobel.sandwich.models.entity.Ingredient;
 import be.technobel.sandwich.repository.IngredientRepository;
 import be.technobel.sandwich.service.IngredientService;
 import be.technobel.sandwich.service.mapper.IngredientMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +34,7 @@ public class IngredientServiceImpl implements IngredientService {
     public IngredientDTO getOne(long id) {
         return ingredientRepository.findById(id)
                 .map( ingredientMapper::toDto )
-                .orElseThrow(() -> new RuntimeException("Ingredient not found"));
+                .orElseThrow(NotFoundException::new);
     }
 
     @Override
@@ -44,8 +47,9 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public void delete(long id) {
         if( !ingredientRepository.existsById(id) )
-            throw new RuntimeException("Ingredient not found");
+            throw new NotFoundException();
 
         ingredientRepository.deleteById(id);
     }
+
 }

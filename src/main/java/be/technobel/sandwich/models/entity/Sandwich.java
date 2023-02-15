@@ -12,8 +12,8 @@ import java.util.Set;
 public class Sandwich {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "sandwich_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "sandwich_id")
     private Long id;
     @Column(nullable = false)
     private String name;
