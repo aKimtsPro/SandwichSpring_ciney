@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{ fragment/layout :: layout( ~{ :: content }) }">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+  <th:block th:fragment="content">
+
+    <h1>Mon panier</h1>
+
+    <table class="table" th:object="${cart}">
+      <thead>
+        <tr>
+          <td>
+            product
+          </td>
+          <td>
+            quantity
+          </td>
+          <td>
+            unit price
+          </td>
+          <td>
+            price
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="item : *{items}">
+          <td th:text="${item.product.name}">product name</td>
+          <td th:text="${item.qtt}">4</td>
+          <td th:text="${item.product.price}">unit price</td>
+          <td th:text="${item.product.price * item.qtt}"> price</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">TOTAL:</td>
+          <td th:text="*{total}"></td>
+        </tr>
+      </tfoot>
+
+    </table>
+
+  </th:block>
+
+</body>
+</html>

@@ -1,3 +1,5 @@
+
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/sandwich_db
@@ -12,3 +14,14 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          datasource:
+            init: DEBUG

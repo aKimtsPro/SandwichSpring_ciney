@@ -2,9 +2,11 @@ package be.technobel.sandwich.utils;
 
 import be.technobel.sandwich.models.entity.Ingredient;
 import be.technobel.sandwich.models.entity.Sandwich;
+import be.technobel.sandwich.models.entity.ShoppingCart;
 import be.technobel.sandwich.models.entity.User;
 import be.technobel.sandwich.repository.IngredientRepository;
 import be.technobel.sandwich.repository.SandwichRepository;
+import be.technobel.sandwich.repository.ShoppingCartRepository;
 import be.technobel.sandwich.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.InitializingBean;
@@ -20,11 +22,13 @@ public class DataInit implements InitializingBean {
     private final SandwichRepository sandwichRepository;
     private final UserRepository userRepository;
     private final IngredientRepository ingredientRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
 
-    public DataInit(SandwichRepository sandwichRepository, UserRepository userRepository, IngredientRepository ingredientRepository) {
+    public DataInit(SandwichRepository sandwichRepository, UserRepository userRepository, IngredientRepository ingredientRepository, ShoppingCartRepository shoppingCartRepository) {
         this.sandwichRepository = sandwichRepository;
         this.userRepository = userRepository;
         this.ingredientRepository = ingredientRepository;
+        this.shoppingCartRepository = shoppingCartRepository;
     }
 
     @Override
@@ -82,6 +86,10 @@ public class DataInit implements InitializingBean {
         user.setBirthdate(LocalDate.EPOCH);
 
         user = userRepository.save(user);
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.setOwner(user);
+        cart = shoppingCartRepository.save(cart);
 
         log.info("-- DATA INIT FINISHED --");
     }

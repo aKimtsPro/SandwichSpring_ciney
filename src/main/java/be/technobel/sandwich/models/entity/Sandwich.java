@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Getter @Setter
-public class Sandwich {
+public class Sandwich extends BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

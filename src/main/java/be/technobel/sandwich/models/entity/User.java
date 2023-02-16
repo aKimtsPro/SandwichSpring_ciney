@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "\"user\"")
 @Getter @Setter
-public class User {
+public class User extends BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
@@ -35,5 +35,8 @@ public class User {
     private boolean enabled = true;
     @Column(nullable = false)
     private boolean blackListed;
+
+    @OneToOne(mappedBy = "owner")
+    private ShoppingCart cart;
 
 }

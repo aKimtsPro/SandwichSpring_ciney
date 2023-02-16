@@ -26,6 +26,7 @@
                 <td>name</td>
                 <td>price</td>
                 <td>details</td>
+                <td>actions</td>
             </tr>
             </thead>
             <tbody>
@@ -35,6 +36,13 @@
                 <td th:text="*{price}">5.50</td>
                 <td>
                     <a th:href="@{ /sandwich/{id} (id=*{id}) }">details</a>
+                </td>
+                <td>
+                    <form action="/cart/add" method="post">
+                        <input type="hidden" name="productId" th:value="*{id}">
+                        <input name="qtt" type="number"/>
+                        <button type="submit">add</button>
+                    </form>
                 </td>
             </tr>
             </tbody>
